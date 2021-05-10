@@ -16,6 +16,13 @@ $user = get_login_user($db);
 
 $carts = get_user_carts($db, $user['user_id']);
 
+$token = get_post('token');
+
+if(check_token($token) === false){
+  set_error('アクセスエラーが発生しました');
+  redirect_to(CART_URL);
+}
+
 if(purchase_carts($db, $carts) === false){
   set_error('商品が購入できませんでした。');
   redirect_to(CART_URL);

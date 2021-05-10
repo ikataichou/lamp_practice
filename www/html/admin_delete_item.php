@@ -20,6 +20,12 @@ if(is_admin($user) === false){
 
 $item_id = get_post('item_id');
 
+$token = get_post('token');
+
+if(check_token($token) === false){
+  set_error('アクセスエラーが発生しました');
+  redirect_to(ADMIN_URL);
+}
 
 if(destroy_item($db, $item_id) === true){
   set_message('商品を削除しました。');

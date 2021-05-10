@@ -21,6 +21,13 @@ if(is_admin($user) === false){
 $item_id = get_post('item_id');
 $stock = get_post('stock');
 
+$token = get_post('token');
+
+if(check_token($token) === false){
+  set_error('アクセスエラーが発生しました');
+  redirect_to(ADMIN_URL);
+}
+
 if(update_item_stock($db, $item_id, $stock)){
   set_message('在庫数を変更しました。');
 } else {
