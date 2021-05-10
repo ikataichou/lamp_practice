@@ -139,3 +139,24 @@ function is_valid_upload_image($image){
 function h($s) {
   return htmlspecialchars($s, ENT_QUOTES, "UTF-8");
 }
+
+//ワンタイムトークンを創る関数
+function get_onetime_token() {
+  $token = get_random_string(30);
+  set_session('onetime_token' , $token);
+  return $token;
+}
+
+//トークンチェック
+function check_token($token) {
+  if($token === '') {
+    return false;
+  }
+  return $token === get_session('onetime_token');
+  //一致しない場合はfalseがreturnされます
+}
+
+//iframe読み込みを禁止
+function iframe_defence() {
+  header('X-Frame-Options: DENY');
+}

@@ -21,6 +21,13 @@ if(is_admin($user) === false){
 $item_id = get_post('item_id');
 $changes_to = get_post('changes_to');
 
+$token = get_post('token');
+
+if(check_token($token) === false){
+  set_error('アクセスエラーが発生しました');
+  redirect_to(ADMIN_URL);
+}
+
 if($changes_to === 'open'){
   update_item_status($db, $item_id, ITEM_STATUS_OPEN);
   set_message('ステータスを変更しました。');

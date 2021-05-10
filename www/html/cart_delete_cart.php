@@ -16,6 +16,13 @@ $user = get_login_user($db);
 
 $cart_id = get_post('cart_id');
 
+$token = get_post('token');
+
+if(check_token($token) === false){
+  set_error('アクセスエラーが発生しました');
+  redirect_to(CART_URL);
+}
+
 if(delete_cart($db, $cart_id)){
   set_message('カートを削除しました。');
 } else {

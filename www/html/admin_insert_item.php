@@ -25,11 +25,17 @@ $stock = get_post('stock');
 
 $image = get_file('image');
 
+$token = get_post('token');
+
+if(check_token($token) === false){
+  set_error('アクセスエラーが発生しました');
+  redirect_to(ADMIN_URL);
+}
+
 if(regist_item($db, $name, $price, $stock, $status, $image)){
   set_message('商品を登録しました。');
 }else {
   set_error('商品の登録に失敗しました。');
 }
-
 
 redirect_to(ADMIN_URL);

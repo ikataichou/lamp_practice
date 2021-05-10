@@ -14,6 +14,12 @@ $password = get_post('password');
 
 $db = get_db_connect();
 
+$token = get_post('token');
+
+if(check_token($token) === false){
+  set_error('アクセスエラーが発生しました');
+  redirect_to(LOGIN_URL);
+}
 
 $user = login_as($db, $name, $password);
 if( $user === false){

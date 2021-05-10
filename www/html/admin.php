@@ -14,6 +14,10 @@ $db = get_db_connect();
 
 $user = get_login_user($db);
 
+iframe_defence();
+
+$token = get_onetime_token();
+
 if(is_admin($user) === false){
   redirect_to(LOGIN_URL);
 }
