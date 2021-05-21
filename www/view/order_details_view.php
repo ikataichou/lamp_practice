@@ -31,7 +31,7 @@
             <td><?php print h($order_detail['name']); ?></td>
             <td><?php print h($order_detail['price']); ?></td>
             <td><?php print h($order_detail['amount']); ?></td>
-            <td><?php print h(number_format($order_detail['price'] * $order_detail['amount'])); ?>円</td>
+            <td><?php print h(number_format($order_detail['sum'])); ?>円</td>
           </tr>
           <?php } ?>
         </tbody>

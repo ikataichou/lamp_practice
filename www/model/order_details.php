@@ -36,6 +36,7 @@ function  get_all_details($db,$order_id){
   SELECT
     order_details.purchase_price AS price,
     order_details.amount AS amount,
+    order_details.purchase_price * order_details.amount AS sum,
     items.name AS name
   FROM
     order_details
@@ -59,6 +60,7 @@ function  get_user_details($db,$user_id,$order_id){
     order_details.item_id,
     order_details.purchase_price AS price,
     order_details.amount AS amount,
+    order_details.purchase_price * order_details.amount AS sum,
     items.name AS name
   FROM
     order_details
