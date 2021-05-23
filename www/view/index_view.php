@@ -42,6 +42,40 @@
       <?php } ?>
       </div>
     </div>
+    
+    <h1>人気ランキングBEST3</h1>
+
+    <div class="card-deck">
+      <div class="row">
+      <?php foreach($ranking_items as $ranking_item){ ?>
+        <div class="col-6 item">
+          <div class="card h-100 text-center">
+            第<?php print h($ranking_number); ?>位
+            <div class="card-header">
+              <?php print h($ranking_item['name']); ?>
+            </div>
+            <figure class="card-body">
+              <img class="card-img" src="<?php print h(IMAGE_PATH . $ranking_item['image']); ?>">
+              <figcaption>
+                <?php print h(number_format($ranking_item['price'])); ?>円
+                <?php if($ranking_item['stock'] > 0){ ?>
+                  <form action="index_add_cart.php" method="post">
+                    <input type="submit" value="カートに追加" class="btn btn-primary btn-block">
+                    <input type="hidden" name="item_id" value="<?php print h($ranking_item['item_id']); ?>">
+                    <input type="hidden" name="token" value="<?php print h($token); ?>">
+                  </form>
+                <?php } else { ?>
+                  <p class="text-danger">現在売り切れです。</p>
+                <?php } ?>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <?php $ranking_number = $ranking_number + 1; ?>
+      <?php } ?>
+      </div>
+    </div>
+
   </div>
   
 </body>

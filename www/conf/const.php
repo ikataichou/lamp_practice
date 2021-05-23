@@ -42,6 +42,8 @@ define('ITEM_NAME_LENGTH_MAX', 100);
 define('ITEM_STATUS_OPEN', 1);
 define('ITEM_STATUS_CLOSE', 0);
 
+define('RANKING_START_NUMBER', 1);
+
 define('PERMITTED_ITEM_STATUSES', array(
   'open' => 1,
   'close' => 0,

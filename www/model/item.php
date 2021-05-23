@@ -211,3 +211,40 @@ function is_valid_item_status($status){
   }
   return $is_valid;
 }
+
+function get_open_ranking($db){
+  return get_ranking_items($db, true);
+}
+
+function get_ranking_items($db, $is_open = false){
+  $sql = '
+    SELECT
+      items.item_id, 
+      items.name,
+      items.stock,
+      items.price,
+      items.image,
+      items.status,
+      SUM(order_details.amount) AS sum
+    FROM
+      items
+    INNER JOIN
+      order_details
+    ON
+      items.item_id = order_details.item_id
+  ';
+  if($is_open === true){
+    $sql .= '
+      WHERE status = 1
+    ';
+  }
+  $sql .= '
+    GROUP BY
+      item_id
+    ORDER BY
+      sum DESC
+    LIMIT 3
+  ';
+
+  return fetch_all_query($db, $sql);
+}
