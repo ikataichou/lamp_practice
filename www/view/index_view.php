@@ -70,7 +70,6 @@
             </figure>
           </div>
         </div>
-        <?php $ranking_number = $ranking_number + 1; ?>
       <?php } ?>
       </div>
     </div>
